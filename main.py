@@ -75,12 +75,14 @@ dist_matrix = '{}cbg_distance_matrix.csv'.format(main_path)  # max distance = 12
 #####################################
 # IN/OUT PATHS FOR WEIGHTS MATRIXES #
 #####################################
-weights_matrix = './data/weights_10km_bins/weights_matrix_{}km_{}km.csv'
+# weights_matrix = './data/weights_10km_bins/weights_matrix_{}km_{}km.csv'
+weights_matrix = './data/weights_05km_bins/weights_matrix_{}km_{}km.csv'
 
 ############################
 # SpSSIM VARIABLES & PATHS #
 ############################
-distance_bins = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80), (80, 90), (90, 100), (100, 110), (110, 120)]  # , (120, 130)]
+# distance_bins = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80), (80, 90), (90, 100), (100, 110), (110, 120)]  # , (120, 130)]
+distance_bins = [(0, 5), (5, 10), (10, 15), (15, 20), (20, 25), (25, 30), (30, 35), (35, 40), (40, 45), (45, 50), (50, 55), (55, 60), (60, 65), (65, 70), (70, 75), (75, 80), (80, 85), (85, 90), (90, 95), (95, 100), (100, 105), (105, 110), (110, 115), (115, 120)]  # , (120, 130)]
 
 r1csv = '{}/spssim_results/lodes2019_lodes2019.csv'.format(main_path)
 r2csv = '{}/spssim_results/lodes2019_sg2019.csv'.format(main_path)
@@ -113,10 +115,16 @@ r26csv = '{}/spssim_results/sg2019_sg201912.csv'.format(main_path)
 # MAIN #
 ########
 if __name__ == '__main__':
+    '''
+    # Only need to run first two sections once. No need to rerun for different distance bins or SpSSIM matrix pairings.
+    ##############################################
+    # Create distance matrix from CBG shapefile. #
+    ##############################################
+    dist = create_distance_matrix(bg_shp, lodes_raw_matrix, dist_matrix)
+    
     ###############################################################################
     # Use input O-D tables to create flow matrixes and probability flow matrixes. #
     ###############################################################################
-    '''
     lodesa = odtable2matrix(lodes_csv_in, lodes_raw_matrix, 'cbg_orig', 'cbg_dest', 'num_jobs')
     lodesb = create_probability_matrix(lodes_raw_matrix, lodes_probs_matrix, 'cbg_orig')
     sga = odtable2matrix(sg_csv_in, sg_raw_matrix, 'cbg_orig', 'cbg_dest', 'dev_count')
@@ -146,16 +154,11 @@ if __name__ == '__main__':
     sg12a = odtable2matrix(sg12_csv_in, sg12_raw_matrix, 'cbg_orig', 'cbg_dest', 'dev_count')
     sg12b = create_probability_matrix(sg12_raw_matrix, sg12_probs_matrix, 'cbg_orig')
     '''
-    ##############################################
-    # Create distance matrix from CBG shapefile. #
-    ##############################################
-    # dist = create_distance_matrix(bg_shp, lodes_raw_matrix, dist_matrix)
-
     ########################################################
     # Create weights matrixes according to specified bins. #
     ########################################################
-    # for b in distance_bins:
-        # df = create_weights_matrix(dist_matrix, weights_matrix, b)
+    for b in distance_bins:
+        df = create_weights_matrix(dist_matrix, weights_matrix, b)
 
     #####################
     # Calculate SpSSIM. #
@@ -216,5 +219,4 @@ if __name__ == '__main__':
     spssim, results = calc_global_spssim(sg_probs_matrix, sg11_probs_matrix, weights_matrix, r25csv, 'cbg_orig', distance_bins)
     # SafeGraph 2019 & SafeGraph DEC 2019
     spssim, results = calc_global_spssim(sg_probs_matrix, sg12_probs_matrix, weights_matrix, r26csv, 'cbg_orig', distance_bins)
-
 

@@ -31,10 +31,16 @@ def odtable2matrix(csv_in, csv_out, index_name, columns_name, values_name):
     return df_pivot
 
 
-def create_probability_matrix(csv_in, csv_out, index_name):
+def create_probability_matrix(csv_in, csv_out, index_name, exclude_within_flow=True):
     # sum all row values
     df = pd.read_csv(csv_in)
+    df[index_name] = df[index_name].astype(str)
     df = df.set_index(index_name)
+
+    if exclude_within_flow:
+        within_flow = df.index.values[:, None] == df.columns.values
+        df = pd.DataFrame(np.select([within_flow], [0], df.values), columns=df.columns, index=df.index)
+
     df['row_total'] = df.sum(axis=1)
 
     # get flow probabilities

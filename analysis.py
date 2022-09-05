@@ -125,7 +125,7 @@ def calc_spssim_constants(results_dir_list):
     c2a = -1 * (2 * covar)
     c2b = -1 * (df1_var + df2_var)
     c2 = max(c2a, c2b)
-    return c1, c2, df1_mean, df1_var, df2_mean, df2_var, covar
+    return c1, c2
 
 
 def calc_results_summaries(results_dir, global_summary_csv, local_summary_csv):

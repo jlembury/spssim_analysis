@@ -118,18 +118,13 @@ def calc_spssim_constants(results_dir_list):
 
     # find constants c1 and c2 such that least similar index score = 0
     # spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / (df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
-    c1a = -1 * (2 * df1_mean * df2_mean)
-    c1b = -1 * (df1_mean ** 2 + df2_mean ** 2)
-    c1 = max(c1a, c1b)
-
-    c2a = -1 * (2 * covar)
-    c2b = -1 * (df1_var + df2_var)
-    c2 = max(c2a, c2b)
+    c1 = -1 * (2 * df1_mean * df2_mean)
+    c2 = -1 * (2 * covar)
     return c1, c2
 
 
 def calc_results_summaries(results_dir, global_summary_csv, local_summary_csv):
-    df = combine_csv_files(RESULTS_DIR)
+    df = combine_csv_files(results_dir)
     df = df.query('global_spssim != 1')
 
     # global summary

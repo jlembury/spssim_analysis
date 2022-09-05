@@ -18,8 +18,10 @@ def Diff(li1, li2):
 def combine_csv_files(csv_dir, combo_csv_out=False, combo_csv=None):
     files = os. listdir(csv_dir)
     df = pd.read_csv(csv_dir + files[0])
+    df['matrix_pair'] = files[0][:-4]
     for f in files[1:]:
         tmp = pd.read_csv(csv_dir + f)
+        tmp['matrix_pair'] = f[:-4]
         df = pd.concat([df, tmp], ignore_index=True)
 
     if combo_csv_out:

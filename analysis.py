@@ -2,6 +2,7 @@
 # Functions for conducting the SpSSIM analysis
 
 import pandas as pd
+from statistics import mean
 from util import combine_csv_files
 
 
@@ -125,3 +126,29 @@ def calc_spssim_constants(results_dir_list):
     c2b = -1 * (df1_var + df2_var)
     c2 = max(c2a, c2b)
     return c1, c2, df1_mean, df1_var, df2_mean, df2_var, covar
+
+
+def calc_results_summaries(results_dir, global_summary_csv, local_summary_csv):
+    df = combine_csv_files(RESULTS_DIR)
+    df = df.query('global_spssim != 1')
+
+    # global summary
+    global_df = df[['global_spssim', 'matrix_pair']].drop_duplicates()
+    global_df = global_df.sort_values(by=['global_spssim'])
+    global_df.to_csv(global_summary_csv)
+
+    # local summary by distance bin
+    dist_bins = df['distance_bin'].unique()
+    local_df = pd.DataFrame(columns=['distance_bin', 'mean_local_spssim', 'min_local_spssim', 'min_matrix_pair', 'max_local_spssim', 'max_matrix_pair', 'local_spssim_list', 'matrix_pairs'])
+    for d in dist_bins:
+        tmp1 = df.query('distance_bin == @d')
+        list_spssim = list(tmp1['local_spssim'])
+        list_mats = list(tmp1['matrix_pair'])
+        l = [[list_spssim[i], list_mats[i]] for i in range(len(tmp1))]
+        l.sort()
+
+        tmp2 = pd.DataFrame(data={'distance_bin': d, 'mean_local_spssim': mean(list_spssim), 'min_local_spssim': l[0][0], 'min_matrix_pair': l[0][1], 'max_local_spssim': l[-1][0], 'max_matrix_pair': l[-1][1], 'local_spssim_list': [[l[i][0] for i in range(len(l))]], 'matrix_pairs': [[l[i][1] for i in range(len(l))]]})
+        local_df = pd.concat([local_df, tmp2], ignore_index=True)
+    local_df.to_csv(local_summary_csv)
+
+    return global_df, local_df

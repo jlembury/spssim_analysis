@@ -2,6 +2,7 @@
 # Functions for conducting the SpSSIM analysis
 
 import pandas as pd
+from util import combine_csv_files
 
 
 def matrixcsv2df(csv_in, index_name):
@@ -94,3 +95,33 @@ def calc_global_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, i
     results.to_csv(results_tbl_csv, index=False)
     print(matrix1_csv, matrix2_csv, spssim)
     return spssim, results
+
+
+def calc_spssim_constants(results_dir_list):
+    # read all results into one df
+    for r in results_dir_list:
+        tmp = combine_csv_files(r)
+        if r == results_dir_list[0]:
+            df = tmp.copy(deep=True)
+        else:
+            df = pd.concat([df, tmp], ignore_index=True)
+
+    # find min local_spssim to calculate constants
+    min_local = df['local_spssim'].min()
+    min_index = df.index[df['local_spssim'] == min_local].tolist()
+    df1_mean = df['mean1'].loc[min_index[0]]
+    df2_mean = df['mean2'].loc[min_index[0]]
+    df1_var = df['variance1'].loc[min_index[0]]
+    df2_var = df['variance2'].loc[min_index[0]]
+    covar = df['covariance'].loc[min_index[0]]
+
+    # find constants c1 and c2 such that least similar index score = 0
+    # spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / (df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
+    c1a = -1 * (2 * df1_mean * df2_mean)
+    c1b = -1 * (df1_mean ** 2 + df2_mean ** 2)
+    c1 = max(c1a, c1b)
+
+    c2a = -1 * (2 * covar)
+    c2b = -1 * (df1_var + df2_var)
+    c2 = max(c2a, c2b)
+    return c1, c2, df1_mean, df1_var, df2_mean, df2_var, covar

@@ -68,41 +68,41 @@ sg12_raw_matrix = '{}raw_matrix/sg_raw_matrix_{}.csv'.format(main_path, yyyymm[1
 sg12_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_{}.csv'.format(main_path, yyyymm[11])
 
 # flows by day of the week
-sg_dow00_csv_in = '{}source_data/sg_od_2019_dow00.csv'
-sg_dow00_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow00.csv'
-sg_dow00_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow00.csv'
+sg_dow00_csv_in = '{}source_data/sg_od_2019_dow00.csv'.format(main_path)
+sg_dow00_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow00.csv'.format(main_path)
+sg_dow00_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow00.csv'.format(main_path)
 
-sg_dow01_csv_in = '{}source_data/sg_od_2019_dow01.csv'
-sg_dow01_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow01.csv'
-sg_dow01_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow01.csv'
+sg_dow01_csv_in = '{}source_data/sg_od_2019_dow01.csv'.format(main_path)
+sg_dow01_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow01.csv'.format(main_path)
+sg_dow01_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow01.csv'.format(main_path)
 
-sg_dow02_csv_in = '{}source_data/sg_od_2019_dow02.csv'
-sg_dow02_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow02.csv'
-sg_dow02_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow02.csv'
+sg_dow02_csv_in = '{}source_data/sg_od_2019_dow02.csv'.format(main_path)
+sg_dow02_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow02.csv'.format(main_path)
+sg_dow02_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow02.csv'.format(main_path)
 
-sg_dow03_csv_in = '{}source_data/sg_od_2019_dow03.csv'
-sg_dow03_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow03.csv'
-sg_dow03_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow03.csv'
+sg_dow03_csv_in = '{}source_data/sg_od_2019_dow03.csv'.format(main_path)
+sg_dow03_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow03.csv'.format(main_path)
+sg_dow03_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow03.csv'.format(main_path)
 
-sg_dow04_csv_in = '{}source_data/sg_od_2019_dow04.csv'
-sg_dow04_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow04.csv'
-sg_dow04_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow04.csv'
+sg_dow04_csv_in = '{}source_data/sg_od_2019_dow04.csv'.format(main_path)
+sg_dow04_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow04.csv'.format(main_path)
+sg_dow04_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow04.csv'.format(main_path)
 
-sg_dow05_csv_in = '{}source_data/sg_od_2019_dow05.csv'
-sg_dow05_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow05.csv'
-sg_dow05_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow05.csv'
+sg_dow05_csv_in = '{}source_data/sg_od_2019_dow05.csv'.format(main_path)
+sg_dow05_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow05.csv'.format(main_path)
+sg_dow05_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow05.csv'.format(main_path)
 
-sg_dow06_csv_in = '{}source_data/sg_od_2019_dow06.csv'
-sg_dow06_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow06.csv'
-sg_dow06_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow06.csv'
+sg_dow06_csv_in = '{}source_data/sg_od_2019_dow06.csv'.format(main_path)
+sg_dow06_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow06.csv'.format(main_path)
+sg_dow06_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow06.csv'.format(main_path)
 
-sg_dow_wds_csv_in = '{}source_data/sg_od_2019_dow_wds.csv'
-sg_dow_wds_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow_wds.csv'
-sg_dow_wds_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow_wds.csv'
+sg_dow_wds_csv_in = '{}source_data/sg_od_2019_dow_wds.csv'.format(main_path)
+sg_dow_wds_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow_wds.csv'.format(main_path)
+sg_dow_wds_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow_wds.csv'.format(main_path)
 
-sg_dow_wes_csv_in = '{}source_data/sg_od_2019_dow_wes.csv'
-sg_dow_wes_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow_wes.csv'
-sg_dow_wes_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow_wes.csv'
+sg_dow_wes_csv_in = '{}source_data/sg_od_2019_dow_wes.csv'.format(main_path)
+sg_dow_wes_raw_matrix = '{}raw_matrix/sg_raw_matrix_dow_wes.csv'.format(main_path)
+sg_dow_wes_probs_matrix = '{}flow_probabilities/sg_flow_probabilities_matrix_dow_wes.csv'.format(main_path)
 ####################################
 # IN/OUT PATHS FOR DISTANCE MATRIX #
 ####################################
@@ -112,38 +112,59 @@ dist_matrix = '{}cbg_distance_matrix.csv'.format(main_path)  # max distance = 12
 #####################################
 # IN/OUT PATHS FOR WEIGHTS MATRIXES #
 #####################################
-weights_matrix = './data/weights_10km_bins/weights_matrix_{}km_{}km.csv'
-# weights_matrix = './data/weights_05km_bins/weights_matrix_{}km_{}km.csv'
+# weights_matrix = './data/weights_10km_bins/weights_matrix_{}km_{}km.csv'
+weights_matrix = './data/weights_05km_bins/weights_matrix_{}km_{}km.csv'
 
 ############################
 # SpSSIM VARIABLES & PATHS #
 ############################
-distance_bins = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80), (80, 90), (90, 100), (100, 110), (110, 120), (120, 130)]
-# distance_bins = [(0, 5), (5, 10), (10, 15), (15, 20), (20, 25), (25, 30), (30, 35), (35, 40), (40, 45), (45, 50), (50, 55), (55, 60), (60, 65), (65, 70), (70, 75), (75, 80), (80, 85), (85, 90), (90, 95), (95, 100), (100, 105), (105, 110), (110, 115), (115, 120), (120, 125)]
+# distance_bins = [(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80), (80, 90), (90, 100), (100, 110), (110, 120), (120, 130)]
+# dist_bin_size = '10'
 
-r1csv = '{}/spssim_results/lodes2019_lodes2019.csv'.format(main_path)
-r2csv = '{}/spssim_results/lodes2019_sg2019.csv'.format(main_path)
-r3csv = '{}/spssim_results/lodes2019_sg201901.csv'.format(main_path)
-r4csv = '{}/spssim_results/lodes2019_sg201902.csv'.format(main_path)
-r5csv = '{}/spssim_results/lodes2019_sg201903.csv'.format(main_path)
-r6csv = '{}/spssim_results/lodes2019_sg201904.csv'.format(main_path),
-r7csv = '{}/spssim_results/lodes2019_sg201905.csv'.format(main_path)
-r8csv = '{}/spssim_results/lodes2019_sg201906.csv'.format(main_path)
-r9csv = '{}/spssim_results/lodes2019_sg201907.csv'.format(main_path)
-r10csv = '{}/spssim_results/lodes2019_sg201908.csv'.format(main_path)
-r11csv = '{}/spssim_results/lodes2019_sg201909.csv'.format(main_path)
-r12csv = '{}/spssim_results/lodes2019_sg201910.csv'.format(main_path)
-r13csv = '{}/spssim_results/lodes2019_sg201911.csv'.format(main_path)
-r14csv = '{}/spssim_results/lodes2019_sg201912.csv'.format(main_path)
-r15csv = '{}/spssim_results/lodes2019_sg2019_dow00.csv'.format(main_path)
-r16csv = '{}/spssim_results/lodes2019_sg2019_dow01.csv'.format(main_path)
-r17csv = '{}/spssim_results/lodes2019_sg2019_dow02.csv'.format(main_path)
-r18csv = '{}/spssim_results/lodes2019_sg2019_dow03.csv'.format(main_path)
-r19csv = '{}/spssim_results/lodes2019_sg2019_dow04.csv'.format(main_path)
-r20csv = '{}/spssim_results/lodes2019_sg2019_dow05.csv'.format(main_path)
-r21csv = '{}/spssim_results/lodes2019_sg2019_dow06.csv'.format(main_path)
-r22csv = '{}/spssim_results/lodes2019_sg2019_dow_weekdays.csv'.format(main_path)
-r23csv = '{}/spssim_results/lodes2019_sg2019_dow_weekends.csv'.format(main_path)
+distance_bins = [(0, 5), (5, 10), (10, 15), (15, 20), (20, 25), (25, 30), (30, 35), (35, 40), (40, 45), (45, 50), (50, 55), (55, 60), (60, 65), (65, 70), (70, 75), (75, 80), (80, 85), (85, 90), (90, 95), (95, 100), (100, 105), (105, 110), (110, 115), (115, 120), (120, 125)]
+dist_bin_size = '05'
+
+r1csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_lodes2019_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r2csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r3csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201901_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r4csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201902_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r5csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201903_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r6csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201904_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r7csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201905_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r8csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201906_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r9csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201907_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r10csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201908_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r11csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201909_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r12csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201910_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r13csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201911_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r14csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg201912_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r15csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow00_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r16csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow01_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r17csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow02_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r18csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow03_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r19csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow04_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r20csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow05_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r21csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow06_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r22csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow_weekdays_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+r23csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow_weekends_{}kmbins.csv'.format(main_path, dist_bin_size, dist_bin_size)
+
+###############################
+# CONSTANTS VARIABLES & PATHS #
+###############################
+# Using c1=0 and c2=2.55093291502342e-16, the minimum local SpSSIM=-3.727811409356615e-22
+results_directory_05kmbins = '{}spssim_results/spssim_results_05km_bins/'.format(main_path)
+results_directory_10kmbins = '{}spssim_results/spssim_results_10km_bins/'.format(main_path)
+results_directory_main = [results_directory_05kmbins, results_directory_10kmbins]
+constant1 = 0  # -2.5509321224232315e-16
+constant2 = 2.55093291502342e-16
+
+########################
+# SPSSIM SUMMARY PATHS #
+########################
+globsumm05km_csv = '{}spssim_results_summary_global_05kmbins.csv'.format(main_path)
+locsumm05km_csv = '{}spssim_results_summary_local_05kmbins.csv'.format(main_path)
+globsumm10km_csv = '{}spssim_results_summary_global_10kmbins.csv'.format(main_path)
+locsumm10km_csv = '{}spssim_results_summary_local_10kmbins.csv'.format(main_path)
 
 ########
 # MAIN #
@@ -155,7 +176,7 @@ if __name__ == '__main__':
     # Create distance matrix from CBG shapefile. #
     ##############################################
     dist = create_distance_matrix(bg_shp, lodes_raw_matrix, dist_matrix)
-    '''
+    
     ###############################################################################
     # Use input O-D tables to create flow matrixes and probability flow matrixes. #
     ###############################################################################
@@ -205,66 +226,80 @@ if __name__ == '__main__':
     sg_dow_wdsb = create_probability_matrix(sg_dow_wds_raw_matrix, sg_dow_wds_probs_matrix, 'cbg_orig')
     sg_dow_wesa = odtable2matrix(sg_dow_wes_csv_in, sg_dow_wes_raw_matrix, 'cbg_orig', 'cbg_dest', 'dev_count')
     sg_dow_wesb = create_probability_matrix(sg_dow_wes_raw_matrix, sg_dow_wes_probs_matrix, 'cbg_orig')
-
+    
     ########################################################
     # Create weights matrixes according to specified bins. #
     ########################################################
     for b in distance_bins:
         df = create_weights_matrix(dist_matrix, weights_matrix, b)
-
+    '''
+    '''
     #####################
     # Calculate SpSSIM. #
     #####################
     # CHECK: Same flows matrix produces SpSSIM = 1
-    spssim, results = calc_global_spssim(lodes_probs_matrix, lodes_probs_matrix, weights_matrix, r1csv, 'cbg_orig', distance_bins)
+    # spssim, results = calc_global_spssim(lodes_probs_matrix, lodes_probs_matrix, weights_matrix, r1csv, 'cbg_orig', distance_bins, constant1, constant2)
 
     # LODES & SafeGraph
     # LODES 2019 & SafeGraph 2019 (Annual)
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_probs_matrix, weights_matrix, r2csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_probs_matrix, weights_matrix, r2csv, 'cbg_orig', distance_bins, constant1, constant2)
 
     # LODES 2019 & SafeGraph 2019 (Monthly)
     # LODES 2019 & SafeGraph JAN 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg1_probs_matrix, weights_matrix, r3csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg1_probs_matrix, weights_matrix, r3csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph FEB 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg2_probs_matrix, weights_matrix, r4csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg2_probs_matrix, weights_matrix, r4csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph MAR 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg3_probs_matrix, weights_matrix, r5csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg3_probs_matrix, weights_matrix, r5csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph APR 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg4_probs_matrix, weights_matrix, r6csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg4_probs_matrix, weights_matrix, r6csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph MAY 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg5_probs_matrix, weights_matrix, r7csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg5_probs_matrix, weights_matrix, r7csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph JUN 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg6_probs_matrix, weights_matrix, r8csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg6_probs_matrix, weights_matrix, r8csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph JUL 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg7_probs_matrix, weights_matrix, r9csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg7_probs_matrix, weights_matrix, r9csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph AUG 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg8_probs_matrix, weights_matrix, r10csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg8_probs_matrix, weights_matrix, r10csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph SEP 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg9_probs_matrix, weights_matrix, r11csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg9_probs_matrix, weights_matrix, r11csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph OCT 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg10_probs_matrix, weights_matrix, r12csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg10_probs_matrix, weights_matrix, r12csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph NOV 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg11_probs_matrix, weights_matrix, r13csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg11_probs_matrix, weights_matrix, r13csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DEC 2019
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg12_probs_matrix, weights_matrix, r14csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg12_probs_matrix, weights_matrix, r14csv, 'cbg_orig', distance_bins, constant1, constant2)
 
     # LODES 2019 & SafeGraph 2019 (Day of Week)
     # LODES 2019 & SafeGraph DOW00 (SUNDAY)
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow00_probs_matrix, weights_matrix, r15csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow00_probs_matrix, weights_matrix, r15csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW01
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow01_probs_matrix, weights_matrix, r16csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow01_probs_matrix, weights_matrix, r16csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW02
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow02_probs_matrix, weights_matrix, r17csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow02_probs_matrix, weights_matrix, r17csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW03
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow03_probs_matrix, weights_matrix, r18csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow03_probs_matrix, weights_matrix, r18csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW04
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow04_probs_matrix, weights_matrix, r19csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow04_probs_matrix, weights_matrix, r19csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW05
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow05_probs_matrix, weights_matrix, r20csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow05_probs_matrix, weights_matrix, r20csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW06
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow06_probs_matrix, weights_matrix, r21csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow06_probs_matrix, weights_matrix, r21csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW WEEKDAYS
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow_wds_probs_matrix, weights_matrix, r22csv, 'cbg_orig', distance_bins)
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow_wds_probs_matrix, weights_matrix, r22csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW WEEKENDS
-    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow_wes_probs_matrix, weights_matrix, r23csv, 'cbg_orig', distance_bins)
-
+    spssim, results = calc_global_spssim(lodes_probs_matrix, sg_dow_wes_probs_matrix, weights_matrix, r23csv, 'cbg_orig', distance_bins, constant1, constant2)
+    '''
+    #######################
+    # CALCULATE CONSTANTS #
+    #######################
+    # After first calculation of SpSSIM, calculate constants so that all SpSSIMs > 0 (and least similar SpSSIM = 0)
+    constant1, constant2 = calc_spssim_constants(results_dir_list=results_directory_main)
+    print(constant1, constant2)
+    '''
+    ##############################
+    # GENERATE RESULTS SUMMARIES #
+    ##############################
+    glob05km, loc05km = calc_results_summaries(results_directory_05kmbins, globsumm05km_csv, locsumm05km_csv)
+    glob10km, loc10km = calc_results_summaries(results_directory_10kmbins, globsumm10km_csv, locsumm10km_csv)
+    '''

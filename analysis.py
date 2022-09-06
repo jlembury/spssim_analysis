@@ -3,6 +3,7 @@
 
 import pandas as pd
 from statistics import mean
+import mpmath as mp
 from util import combine_csv_files
 
 
@@ -69,8 +70,8 @@ def calc_local_spssim(matrix1_csv, matrix2_csv, weights_csv, index_name, c1, c2)
 
     covar = calc_covariance(df1w, df2w, df1_mean, df2_mean, n)
 
-    spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / (
-                (df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
+    spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / ((df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2)) if ((df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2)) != 0 else 0
+
     return n, df1_mean, df2_mean, df1_var, df2_var, covar, spssim
 
 
@@ -109,6 +110,8 @@ def calc_spssim_constants(results_dir_list):
 
     # find min local_spssim to calculate constants
     min_local = df['local_spssim'].min()
+    print('Minimum local SpSSIM = {}'.format(min_local))
+
     min_index = df.index[df['local_spssim'] == min_local].tolist()
     df1_mean = df['mean1'].loc[min_index[0]]
     df2_mean = df['mean2'].loc[min_index[0]]
@@ -118,8 +121,15 @@ def calc_spssim_constants(results_dir_list):
 
     # find constants c1 and c2 such that least similar index score = 0
     # spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / (df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
-    c1 = -1 * (2 * df1_mean * df2_mean)
-    c2 = -1 * (2 * covar)
+    c1a = -1 * (2 * df1_mean * df2_mean)
+    c1b = -1 * (df1_mean ** 2 + df2_mean ** 2)
+    c1 = max(c1a, c1b)
+    c2a = -1 * (2 * covar)
+    c2b = -1 * (df1_var + df2_var)
+    c2 = max(c2a, c2b)
+    spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / ((df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
+    print('Updated minimum local SpSSIM = {}'.format(spssim))
+
     return c1, c2
 
 

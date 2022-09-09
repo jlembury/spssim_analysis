@@ -52,7 +52,7 @@ def calc_covariance(df1, df2, df1_mean, df2_mean, n):
     return covariance
 
 
-def calc_local_spssim(matrix1_csv, matrix2_csv, weights_csv, index_name, c1, c2):
+def calc_distbased_spssim(matrix1_csv, matrix2_csv, weights_csv, index_name, c1, c2):
     df1 = matrixcsv2df(matrix1_csv, index_name)
     df2 = matrixcsv2df(matrix2_csv, index_name)
     w = matrixcsv2df(weights_csv, index_name)
@@ -76,23 +76,24 @@ def calc_local_spssim(matrix1_csv, matrix2_csv, weights_csv, index_name, c1, c2)
 
 
 def calc_global_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, index_name, distance_bins, c1=0, c2=0):
-    local_spssim_list = []
+    distbased_spssim_list = []
     results = pd.DataFrame(
         columns=['matrix1', 'matrix2', 'distance_bin', 'constant1', 'constant2', 'n', 'mean1', 'mean2', 'variance1',
-                 'variance2', 'covariance', 'local_spssim'])
+                 'variance2', 'covariance', 'distbased_spssim'])
 
     for b in distance_bins:
-        n, mean1, mean2, var1, var2, covar, local_spssim = calc_local_spssim(matrix1_csv, matrix2_csv,
+        n, mean1, mean2, var1, var2, covar, distbased_spssim = calc_distbased_spssim(matrix1_csv, matrix2_csv,
                                                                              weights_csv.format(b[0], b[1]), index_name,
                                                                              c1, c2)
-        local_spssim_list.append(local_spssim)
+        distbased_spssim_list.append(distbased_spssim)
+        print(distbased_spssim_list)
         tmp_result = pd.DataFrame(
             data={'matrix1': matrix1_csv[2:-4], 'matrix2': matrix2_csv[2:-4], 'distance_bin': str(b), 'constant1': c1,
                   'constant2': c2, 'n': n, 'mean1': mean1, 'mean2': mean2, 'variance1': var1, 'variance2': var2,
-                  'covariance': covar, 'local_spssim': local_spssim}, index=[0])
+                  'covariance': covar, 'distbased_spssim': distbased_spssim}, index=[0])
         results = pd.concat([results, tmp_result], ignore_index=True)
 
-    spssim = sum(local_spssim_list) / len(local_spssim_list)
+    spssim = sum(distbased_spssim_list) / len(distbased_spssim_list)
     results['global_spssim'] = spssim
     results.to_csv(results_tbl_csv, index=False)
     print(matrix1_csv, matrix2_csv, spssim)
@@ -108,11 +109,11 @@ def calc_spssim_constants(results_dir_list):
         else:
             df = pd.concat([df, tmp], ignore_index=True)
 
-    # find min local_spssim to calculate constants
-    min_local = df['local_spssim'].min()
-    print('Minimum local SpSSIM = {}'.format(min_local))
+    # find min distbased_spssim to calculate constants
+    min_distbased = df['distbased_spssim'].min()
+    print('Minimum distbased SpSSIM = {}'.format(min_distbased))
 
-    min_index = df.index[df['local_spssim'] == min_local].tolist()
+    min_index = df.index[df['distbased_spssim'] == min_distbased].tolist()
     df1_mean = df['mean1'].loc[min_index[0]]
     df2_mean = df['mean2'].loc[min_index[0]]
     df1_var = df['variance1'].loc[min_index[0]]
@@ -128,12 +129,12 @@ def calc_spssim_constants(results_dir_list):
     c2b = -1 * (df1_var + df2_var)
     c2 = max(c2a, c2b)
     spssim = ((2 * df1_mean * df2_mean + c1) * (2 * covar + c2)) / ((df1_mean ** 2 + df2_mean ** 2 + c1) * (df1_var + df2_var + c2))
-    print('Updated minimum local SpSSIM = {}'.format(spssim))
+    print('Updated minimum distbased SpSSIM = {}'.format(spssim))
 
     return c1, c2
 
 
-def calc_results_summaries(results_dir, global_summary_csv, local_summary_csv):
+def calc_results_summaries(results_dir, global_summary_csv, distbased_summary_csv):
     df = combine_csv_files(results_dir)
     df = df.query('global_spssim != 1')
 
@@ -142,18 +143,18 @@ def calc_results_summaries(results_dir, global_summary_csv, local_summary_csv):
     global_df = global_df.sort_values(by=['global_spssim'])
     global_df.to_csv(global_summary_csv)
 
-    # local summary by distance bin
+    # distbased summary by distance bin
     dist_bins = df['distance_bin'].unique()
-    local_df = pd.DataFrame(columns=['distance_bin', 'mean_local_spssim', 'min_local_spssim', 'min_matrix_pair', 'max_local_spssim', 'max_matrix_pair', 'local_spssim_list', 'matrix_pairs'])
+    distbased_df = pd.DataFrame(columns=['distance_bin', 'mean_distbased_spssim', 'min_distbased_spssim', 'min_matrix_pair', 'max_distbased_spssim', 'max_matrix_pair', 'distbased_spssim_list', 'matrix_pairs'])
     for d in dist_bins:
         tmp1 = df.query('distance_bin == @d')
-        list_spssim = list(tmp1['local_spssim'])
+        list_spssim = list(tmp1['distbased_spssim'])
         list_mats = list(tmp1['matrix_pair'])
         l = [[list_spssim[i], list_mats[i]] for i in range(len(tmp1))]
         l.sort()
 
-        tmp2 = pd.DataFrame(data={'distance_bin': d, 'mean_local_spssim': mean(list_spssim), 'min_local_spssim': l[0][0], 'min_matrix_pair': l[0][1], 'max_local_spssim': l[-1][0], 'max_matrix_pair': l[-1][1], 'local_spssim_list': [[l[i][0] for i in range(len(l))]], 'matrix_pairs': [[l[i][1] for i in range(len(l))]]})
-        local_df = pd.concat([local_df, tmp2], ignore_index=True)
-    local_df.to_csv(local_summary_csv)
+        tmp2 = pd.DataFrame(data={'distance_bin': d, 'mean_distbased_spssim': mean(list_spssim), 'min_distbased_spssim': l[0][0], 'min_matrix_pair': l[0][1], 'max_distbased_spssim': l[-1][0], 'max_matrix_pair': l[-1][1], 'distbased_spssim_list': [[l[i][0] for i in range(len(l))]], 'matrix_pairs': [[l[i][1] for i in range(len(l))]]})
+        distbased_df = pd.concat([distbased_df, tmp2], ignore_index=True)
+    distbased_df.to_csv(distbased_summary_csv)
 
-    return global_df, local_df
+    return global_df, distbased_df

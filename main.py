@@ -151,7 +151,7 @@ r23csv = '{}/spssim_results/spssim_results_{}km_bins/lodes2019_sg2019_dow_weeken
 ###############################
 # CONSTANTS VARIABLES & PATHS #
 ###############################
-# Using c1=0 and c2=2.55093291502342e-16, the minimum local SpSSIM=-3.727811409356615e-22
+# Using c1=0 and c2=2.55093291502342e-16, the minimum distance-based SpSSIM=-3.727811409356615e-22
 results_directory_05kmbins = '{}spssim_results/spssim_results_05km_bins/'.format(main_path)
 results_directory_10kmbins = '{}spssim_results/spssim_results_10km_bins/'.format(main_path)
 results_directory_main = [results_directory_05kmbins, results_directory_10kmbins]
@@ -162,9 +162,9 @@ constant2 = 2.55093291502342e-16
 # SPSSIM SUMMARY PATHS #
 ########################
 globsumm05km_csv = '{}spssim_results_summary_global_05kmbins.csv'.format(main_path)
-locsumm05km_csv = '{}spssim_results_summary_local_05kmbins.csv'.format(main_path)
+distbasedsumm05km_csv = '{}spssim_results_summary_distbased_05kmbins.csv'.format(main_path)
 globsumm10km_csv = '{}spssim_results_summary_global_10kmbins.csv'.format(main_path)
-locsumm10km_csv = '{}spssim_results_summary_local_10kmbins.csv'.format(main_path)
+distbasedsumm10km_csv = '{}spssim_results_summary_distbased_10kmbins.csv'.format(main_path)
 
 ########
 # MAIN #
@@ -300,6 +300,6 @@ if __name__ == '__main__':
     ##############################
     # GENERATE RESULTS SUMMARIES #
     ##############################
-    glob05km, loc05km = calc_results_summaries(results_directory_05kmbins, globsumm05km_csv, locsumm05km_csv)
-    glob10km, loc10km = calc_results_summaries(results_directory_10kmbins, globsumm10km_csv, locsumm10km_csv)
+    glob05km, distbased05km = calc_results_summaries(results_directory_05kmbins, globsumm05km_csv, distbasedsumm05km_csv)
+    glob10km, distbased10km = calc_results_summaries(results_directory_10kmbins, globsumm10km_csv, distbasedsumm10km_csv)
     '''

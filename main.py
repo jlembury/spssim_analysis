@@ -170,7 +170,6 @@ distbasedsumm10km_csv = '{}spssim_distance_based/spssim_results_summary_distbase
 # MAIN #
 ########
 if __name__ == '__main__':
-    '''
     # Only need to run first two sections once. No need to rerun for different distance bins or SpSSIM matrix pairings.
     ##############################################
     # Create distance matrix from CBG shapefile. #
@@ -232,8 +231,8 @@ if __name__ == '__main__':
     ########################################################
     for b in distance_bins:
         df = create_weights_matrix(dist_matrix, weights_matrix, b)
-    '''
-    '''
+
+
     #####################
     # Calculate SpSSIM. #
     #####################
@@ -289,17 +288,16 @@ if __name__ == '__main__':
     spssim, results = calc_global_distbased_spssim(lodes_probs_matrix, sg_dow_wds_probs_matrix, weights_matrix, r22csv, 'cbg_orig', distance_bins, constant1, constant2)
     # LODES 2019 & SafeGraph DOW WEEKENDS
     spssim, results = calc_global_distbased_spssim(lodes_probs_matrix, sg_dow_wes_probs_matrix, weights_matrix, r23csv, 'cbg_orig', distance_bins, constant1, constant2)
-    '''
+
     #######################
     # CALCULATE CONSTANTS #
     #######################
     # After first calculation of SpSSIM, calculate constants so that all SpSSIMs > 0 (and least similar SpSSIM = 0)
     constant1, constant2 = calc_distbased_spssim_constants(results_dir_list=results_directory_main)
     print(constant1, constant2)
-    '''
+
     ##############################
     # GENERATE RESULTS SUMMARIES #
     ##############################
     glob05km, distbased05km = calc_distbased_results_summaries(results_directory_05kmbins, globsumm05km_csv, distbasedsumm05km_csv)
     glob10km, distbased10km = calc_distbased_results_summaries(results_directory_10kmbins, globsumm10km_csv, distbasedsumm10km_csv)
-    '''

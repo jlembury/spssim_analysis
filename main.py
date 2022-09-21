@@ -1,5 +1,5 @@
 # Jessica Embury, San Diego State University, Fall 2022
-# SpSSIM analysis of LODES and SafeGraph flow data
+# Distance-Based SpSSIM analysis of LODES and SafeGraph flow data
 
 from matrixes import *
 from spssim_distbased_analysis import *

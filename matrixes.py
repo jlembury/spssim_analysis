@@ -32,7 +32,7 @@ def odtable2matrix(csv_in, csv_out, index_name, columns_name, values_name):
     return df_pivot
 
 
-def create_probability_matrix(csv_in, csv_out, index_name, exclude_within_flow=True):
+def create_distbased_probability_matrix(csv_in, csv_out, index_name, exclude_within_flow=True):
     # sum all row values
     df = pd.read_csv(csv_in)
     df[index_name] = df[index_name].astype(str)
@@ -56,6 +56,37 @@ def create_probability_matrix(csv_in, csv_out, index_name, exclude_within_flow=T
     print(df_probs.row_total.unique())
 
     return df_probs
+
+
+def create_local_probability_matrix(csv_in, csv_out, index_name,  inflow=True, exclude_within_flow=True):
+    # INFLOWS = Calculations down columns
+    # OUTFLOWS = Calculations across rows --> Transpose to calculate down columns
+
+    # raw matrix
+    df = pd.read_csv(csv_in)
+    df[index_name] = df[index_name].astype(str)
+    df = df.set_index(index_name)
+
+    # change within flow values to None
+    if exclude_within_flow:
+        within_flow = df.index.values[:, None] == df.columns.values
+        df = pd.DataFrame(np.select([within_flow], [np.nan], df.values), columns=df.columns, index=df.index)
+
+    # if outflow (inflow=False), transpose the df
+    if inflow==False:
+        df = df.transpose()
+
+    # get flow probabilities
+    df.loc['total'] = df.sum()
+    df.loc['total'] = df.loc['total'].replace(0, np.nan)
+    probs = df[:-1].div(df.loc['total']).replace(np.inf, np.nan)
+    probs.to_csv(csv_out)
+
+    # check that probabilities for each cbg have a sum=1 (or 0 if no flow to/from the CBG)
+    probs.loc['total'] = probs.sum()
+    print(probs.loc['total'].unique())
+
+    return probs[:-1]
 
 
 def create_distance_matrix(shp_in, cbg_check_csv, csv_out):
@@ -105,4 +136,15 @@ def create_weights_matrix(csv_in, csv_out, dist_bin):
         df[col] = df[col].apply(lambda x: 1 if (x >= dist_bin[0]) & (x < dist_bin[1]) else 0)
 
     df.to_csv(csv_out.format(dist_bin[0], dist_bin[1]))
+    return df
+
+
+def create_weighted_matrix(df_values, df_weights):
+    df = df_values.mul(df_weights)
+    return df
+
+
+def matrixcsv2df(csv_in, index_name):
+    df = pd.read_csv(csv_in)
+    df = df.set_index(index_name)
     return df

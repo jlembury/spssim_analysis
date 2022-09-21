@@ -1,21 +1,9 @@
 # Jessica Embury, San Diego State University, Fall 2022
-# Functions for conducting the SpSSIM analysis
+# Functions for conducting the distance-based SpSSIM analysis
 
 import pandas as pd
 from statistics import mean
-import mpmath as mp
 from util import combine_csv_files
-
-
-def matrixcsv2df(csv_in, index_name):
-    df = pd.read_csv(csv_in)
-    df = df.set_index(index_name)
-    return df
-
-
-def create_weighted_matrix(df_values, df_weights):
-    df = df_values.mul(df_weights)
-    return df
 
 
 def calc_matrix_mean(df):
@@ -75,7 +63,7 @@ def calc_distbased_spssim(matrix1_csv, matrix2_csv, weights_csv, index_name, c1,
     return n, df1_mean, df2_mean, df1_var, df2_var, covar, spssim
 
 
-def calc_global_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, index_name, distance_bins, c1=0, c2=0):
+def calc_global_distbased_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, index_name, distance_bins, c1=0, c2=0):
     distbased_spssim_list = []
     results = pd.DataFrame(
         columns=['matrix1', 'matrix2', 'distance_bin', 'constant1', 'constant2', 'n', 'mean1', 'mean2', 'variance1',
@@ -83,8 +71,8 @@ def calc_global_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, i
 
     for b in distance_bins:
         n, mean1, mean2, var1, var2, covar, distbased_spssim = calc_distbased_spssim(matrix1_csv, matrix2_csv,
-                                                                             weights_csv.format(b[0], b[1]), index_name,
-                                                                             c1, c2)
+                                                                                     weights_csv.format(b[0], b[1]),
+                                                                                     index_name, c1, c2)
         distbased_spssim_list.append(distbased_spssim)
         print(distbased_spssim_list)
         tmp_result = pd.DataFrame(
@@ -100,7 +88,7 @@ def calc_global_spssim(matrix1_csv, matrix2_csv, weights_csv, results_tbl_csv, i
     return spssim, results
 
 
-def calc_spssim_constants(results_dir_list):
+def calc_distbased_spssim_constants(results_dir_list):
     # read all results into one df
     for r in results_dir_list:
         tmp = combine_csv_files(r)
@@ -134,7 +122,7 @@ def calc_spssim_constants(results_dir_list):
     return c1, c2
 
 
-def calc_results_summaries(results_dir, global_summary_csv, distbased_summary_csv):
+def calc_distbased_results_summaries(results_dir, global_summary_csv, distbased_summary_csv):
     df = combine_csv_files(results_dir)
     df = df.query('global_spssim != 1')
 

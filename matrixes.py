@@ -18,7 +18,7 @@ def odtable2matrix(csv_in, csv_out, index_name, columns_name, values_name):
     # drop cbg if exists (coastline water only)
     try:
         df_pivot = df_pivot.drop([60739901000], axis=0)
-        df_pivot = df_pivot.drop([60739901000], axis=1)
+        df_pivot = df_pivot.drop(['60739901000'], axis=1)
     except:
         pass
 
@@ -58,12 +58,13 @@ def create_distbased_probability_matrix(csv_in, csv_out, index_name, exclude_wit
     return df_probs
 
 
-def create_local_probability_matrix(csv_in, csv_out, index_name,  inflow=True, exclude_within_flow=True):
+def create_local_probability_matrix(csv_in, od_csv_out, prob_csv_out, index_name,  columns_name, values_name, inflow=True, exclude_within_flow=True):
     # INFLOWS = Calculations down columns
     # OUTFLOWS = Calculations across rows --> Transpose to calculate down columns
 
     # raw matrix
-    df = pd.read_csv(csv_in)
+    od_df = odtable2matrix(csv_in, od_csv_out, index_name, columns_name, values_name)
+    df = pd.read_csv(od_csv_out)
     df[index_name] = df[index_name].astype(str)
     df = df.set_index(index_name)
 
@@ -80,7 +81,7 @@ def create_local_probability_matrix(csv_in, csv_out, index_name,  inflow=True, e
     df.loc['total'] = df.sum()
     df.loc['total'] = df.loc['total'].replace(0, np.nan)
     probs = df[:-1].div(df.loc['total']).replace(np.inf, np.nan)
-    probs.to_csv(csv_out)
+    probs.to_csv(prob_csv_out)
 
     # check that probabilities for each cbg have a sum=1 (or 0 if no flow to/from the CBG)
     probs.loc['total'] = probs.sum()

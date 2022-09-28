@@ -46,28 +46,24 @@ def calc_local_spssim_singlebin(dfw1, dfw2, spssim_csv, distance_bin, c1, c2):
     return spssim
 
 
-def calc_local_spssim(probability_matrix_csv1, probability_matrix_csv2, weights_csv, spssim_bin_csv, spssim_local_csv, spssim_bin_directory, distance_bins, index_name, c1=0, c2=0, inflow=True):
-    df = pd.DataFrame(columns=['distance_bin', 'n', 'mean1', 'var1', 'mean2', 'var2', 'covar', 'c1', 'c2', 'bin_local'])
-    df.index.name = index_name
-
+def calc_local_spssim(probability_matrix_csv1, probability_matrix_csv2, weights_csv, spssim_bin_csv, spssim_local_csv, distance_bins, index_name, c1=0, c2=0):
+    print(probability_matrix_csv1, probability_matrix_csv2)
+    df = pd.DataFrame(columns=[index_name, 'distance_bin', 'n', 'mean1', 'mean2', 'var1', 'var2', 'covar', 'c1', 'c2', 'bin_local'])
     df1 = matrixcsv2df(probability_matrix_csv1, index_name)
     df2 = matrixcsv2df(probability_matrix_csv2, index_name)
 
     for b in distance_bins:
+        print(b)
         w = matrixcsv2df(weights_csv.format(b[0], b[1]), index_name)
-        if inflow: # Distance weight matrixes are formatted for outflows. Need to transpose for inflows.
-            w = w.transpose()
-
         dfw1 = pd.DataFrame(df1.values*w.values, columns=df1.columns, index=df1.index)
         dfw2 = pd.DataFrame(df2.values*w.values, columns=df2.columns, index=df2.index)
-        dfs = calc_local_spssim_singlebin(dfw1, dfw2, spssim_bin_csv, b, c1, c2)
-
+        dfs = calc_local_spssim_singlebin(dfw1, dfw2, spssim_bin_csv, b, c1, c2).reset_index()
+        dfs = dfs.rename(columns={'index':index_name})
         df = pd.concat([df, dfs])
 
-    df = df.reset_index()
-    df = df.rename(columns={'index':'cbg'})
+    df = df.rename(columns={index_name:'cbg'})
     dfpiv = df.pivot(index='cbg', columns='distance_bin', values='bin_local')
-
+    print(len(df), len(dfpiv))
     # calculate local spssims
     dfpiv['local_spssim'] = dfpiv.mean(axis=1)
     dfpiv['count'] = dfpiv.count(axis='columns')
